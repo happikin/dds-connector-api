@@ -1,0 +1,9 @@
+module TestData {
+
+    @topic
+    struct MediaPacket {
+        string message;
+        @key uint32 id;
+    };
+    
+};

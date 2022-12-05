@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${default}",
+                "${workspaceFolder}",
+                "/home/happikin/OpenDDS-3.20",
+                "/home/happikin/OpenDDS-3.20/ACE_wrappers",
+                "/home/happikin/OpenDDS-3.20/ACE_wrappers/TAO",
+                "${workspaceFolder}/build/opendds_generated"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64"
+        }
+    ],
+    "version": 4
+}
