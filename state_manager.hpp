@@ -4,7 +4,7 @@ enum control_signal_e {
     terminate
 };
 
-enum control_state_e {
+enum thread_state_e {
     alive,
     dead
 };
