@@ -1,5 +1,5 @@
 #### points to be noted:-
--   there are three classes in this dds-connector api, namely `dds::node`, `dd::publisher`, `dd::subscriber`
+-   there are three classes in this dds-connector api, namely `dds::node`, `dds::publisher`, `dds::subscriber`
 -   all three classes belong to `namespace dds` which falls under the `communication namespace`
 -   and the `communication namespace` falls under the parent `sdv namespace`
 -   example use of a `dds::node` class is `communication::dds::node node1(argc, argv);`
