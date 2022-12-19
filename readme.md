@@ -63,4 +63,22 @@ To do so use the following syntax `publisher_one.write<TestData::MediaPacket,Tes
    - write() is again a template based function which takes in two template arguments namely `payload_type` and `writer_t`, in our case these are `MediaPacket` and `MediaPacketDataWriter` respectively.
    - then pass in the `packet` and topic name as actual arguments to this call
 7. finally we can wait for some ack from subscriber using the following syntax `publisher_one.wait_for_acknowledgments("TOPIC_A");`
+
 *NOTE:- [click here](./single_publisher.cpp) to open the file with full publisher code*
+
+#### How to create a simple Subscriber:-
+1. start by creating an instance of dds::node which will internally create a dds participant to build a domain for all related subscribers. To do so use the following syntax `communication::dds::node dds_node(argc,argv);`
+2. next we need to create a topic and register it into the dds::node we just created. To do so you can use the dds::node::create_topic() function like this `dds_node.create_topic<TestData::MediaPacketTypeSupport_ptr,TestData::MediaPacketTypeSupportImpl>("TOPIC_A");`
+   1. create_topic() is a template based function which takes in two template arguments namely `type_support` and `type_support_impl` which in our case are `MediaPacketTypeSupport_ptr` and `MediaPacketTypeSupportImpl` respectively.
+   2. then we have an actual function argument that requires you to pass in the topic name in string format, here we write `TOPIC_A`
+3. Now our environment is ready, so we can go ahead and create a subscriber using the following syntax `dds::subscriber subscriber_one(dds_node);`, this creates a sub and links it into the previously created dds::node dds_node object
+4. To get notified on any incoming data we need to create a class which inherits from `DDS::DataReaderListener`. In our example code we created a class called `listener` which has several virtual function but we are interested in `on_data_available()` to actually receive the data packet.
+   1. after creating the listener class we create it's instance as following `DDS::DataReaderListener_ptr listener_ptr = new listener;`
+   2. we need this object to link with a data reader so as to get notification of certain events on data related to the above created topic
+5. Lets create a data reader using the following syntax `subscriber_one.create_reader<TestData::MediaPacketDataReader>(dds_node,"TOPIC_A",listener_ptr);`
+   1. again we notice that the create_reader is a generic function which takes in a template parameter namely `reader_t` and three actual arguments namely `_dds_node` , `_topic_name` and `_listener`.
+   2. here we pass in the dds_node object, 'TOPIC_A' as _topic_name and listener_ptr as the third argument for _listener.
+6. Now we are ready to get notifications on any new data being received on our topic `TOPIC_A`
+7. we can use the additional function called `wait_for_publisher()` to set a wait until the publisher for topic `TOPIC_A` is not available
+
+*NOTE:- [click here](./single_subscriber.cpp)* to view full code of simple subscriber
